@@ -2,7 +2,7 @@ public class Invertir{
         public static void main(String[] args){
                 int[] mat = {1,2,3,4,5};
                 int[] matf;
-                matf=invertirarray(mat);
+                matf=invertirArray(mat);
 		for(int i : matf){
 			System.out.println(i);
 		}
