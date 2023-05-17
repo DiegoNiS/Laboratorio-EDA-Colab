@@ -13,7 +13,7 @@ public class trianguloRecursivo{
         System.out.println();
         if(base<6)
         {
-            trianguloRecursivo(int base+1);
+            trianguloRecursivo(base+1);
 
         }
     }  
