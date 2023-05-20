@@ -1,23 +1,21 @@
 public class Rotar {
     public static void main(String args[]) {
-        int [] arr = {1,2,3,4};
-        int [] arrIn = new int [arr.length];
-        arrIn = rotar(arr);
-        // d = 3;
-        /*
-        for (int i=0; i<=d; i++){
-            arrIn = rotar(arr);
+        int d = 2;
+        int [] a = {1,2,3,4,5};
+        int [] aIz = a;
+        for(int i = 0; i < d; i++){
+            aIz = rotarIzquierdaArray(aIz);
         }
-        */
-        System.out.println(arrIn[0]+" "+arrIn[1]+" "+arrIn[2]+" "+arrIn[3]);
+        System.out.println("A = ["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+", "+a[4]+"]");
+        System.out.println("Aiz = ["+aIz[0]+", "+aIz[1]+", "+aIz[2]+", "+aIz[3]+", "+aIz[4]+"]");
     }
-    public static int[] rotar(int[] a){
-        int c = a[0];
-        int [] b = new int[a.length];
-        for(int i =0; i<a.length-1;i++){
-            b[i]=a[++i];
+    public static int[] rotarIzquierdaArray(int [] a){
+        int [] aIz = new int [a.length];
+        int num = a[0];
+        for (int i = 0; i < a.length-1 ; i++){
+            aIz[i] = a[i+1];
         }
-        b[a.length-1] = c;
-        return b;
+        aIz[aIz.length-1] = num;
+        return aIz;
     }
 }
