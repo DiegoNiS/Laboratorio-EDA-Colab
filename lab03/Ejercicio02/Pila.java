@@ -1,27 +1,46 @@
+import Exceptions.ExceptionIsEmpty;
 // Clase generica Pila
-public class Pila <T> implements Stack<T>{
+public class Pila <T>{
     private Node<T> tope;
+    //Constructor
     public Pila(){
         this.tope = null;
     }
-    @Override //isEmpty: para verificar si la pila esta vacia
+    //Metodo isEmpty: indica si la pila esta vacia
     public boolean isEmpty() {
         return tope==null;
     }
-    @Override //push: para insertar un elemento en el final
+    //Metodo push: inserta un elemento al final de la pila
     public void push(T x) {
-        this.tope = new Node<T>(x, this.tope);
+        this.tope= new Node<T>(x, this.tope);
     }
-    @Override
-    public T top() {
-        //sentencias
-        return tope.getDato();//Provicional
+    //Metodo peek: (top), devuelve el dato del ultimo elemento
+    public T peek() throws ExceptionIsEmpty{
+        if(isEmpty())
+            throw new ExceptionIsEmpty("La pila esta Vacia");
+        return this.tope.getDato();
     }
-    @Override
-    public T pop(T x) {
-        //sentencias
-        return tope.getDato();//Provisional
+    /*Metodo pop: excepcion IsEmpty, o desconecta al ultimo de lista y devuelve 
+    su dato*/
+    public T pop() throws ExceptionIsEmpty{
+        if(isEmpty())
+            throw new ExceptionIsEmpty("La pila no tiene elementos");
+        Node<T> aux = this.tope;
+        this.tope = this.tope.getNext();
+        return aux.getDato();
     }
+    /*Metodo search: devuelde -1 si no encuentra el elemento, o  la cantidad de 
+    elementos que faltan desde el tope, es utiliza un for para recorrer*/
+    public int search(T x){
+        int cont = 1;
+        for(Node<T> a = this.tope; a!= null; a = a.getNext()){
+            if(a.getDato() == x)
+                return cont;
+            cont++;
+        }
+        return -1;
+    }
+    //Metodo toString: recorrera con un for los nodos y los devuelve en un String
     @Override
     public String toString(){
         String cad = "";
