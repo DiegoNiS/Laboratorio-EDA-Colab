@@ -6,6 +6,9 @@ public class Node <T>{
         this.dato = dato;
         this.next = next;
     }
+    public Node(T dato){
+        this(dato,null);
+    }
     public T getDato(){
         return this.dato;
     }
@@ -17,5 +20,9 @@ public class Node <T>{
     }
     public void setNext(Node next){
         this.next = next;
+    }
+    @Override
+    public String toString(){
+        return this.dato.toString();
     }
 }
