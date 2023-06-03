@@ -1,8 +1,7 @@
-// Clase generica Stack (Pila)
-public class Stack <T>{
-    private T inicio = null;
-    public Stack(){
-    //
-    }
-    
+// Interface Stack
+public interface Stack<T> {
+    boolean isEmpty();
+    void push(T x);
+    T top();
+    T pop(T x);
 }
