@@ -1,10 +1,12 @@
-import java.util.Stack;
+// Clase principal Ejercicio02: Casos de PRUEBA
 public class Ejercicio02 {
     public static void main (String[]args){
         //probar las pilas
-        Stack<Integer> miPila = new Stack<Integer>();
-        miPila.add(78);
-        
-        System.out.println(miPila.empty());
+        Pila<Integer> pila1 = new Pila<Integer>();
+        System.out.println("PILA1");       
+        pila1.push(78);
+        pila1.push(33);
+        pila1.push(11);
+        System.out.println(pila1);
     }
 }
