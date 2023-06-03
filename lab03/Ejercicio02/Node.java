@@ -2,6 +2,7 @@
 public class Node <T>{
     private T dato;
     private Node<T> next;
+    //Constructores
     public Node(T dato, Node<T> next){
         this.dato = dato;
         this.next = next;
@@ -9,6 +10,7 @@ public class Node <T>{
     public Node(T dato){
         this(dato,null);
     }
+    //getters y setters
     public T getDato(){
         return this.dato;
     }
@@ -21,6 +23,7 @@ public class Node <T>{
     public void setNext(Node next){
         this.next = next;
     }
+    //Metodo toString: devuelve en String, el dato del nodo
     @Override
     public String toString(){
         return this.dato.toString();
