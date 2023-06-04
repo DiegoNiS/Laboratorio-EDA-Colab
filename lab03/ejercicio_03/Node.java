@@ -1,19 +1,13 @@
-package javaapplication1;
-/*Implementa una cola usando POO con tipos genéricos siguiendo los estándares
-de Java (los métodos para una cola) verifique:
-o https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html
-*/
-
-public class Node <T> {
+public class Node<T> {
     private T node;
-    private Node <T> nextN;
+    private Node<T> nextN;
 
     public Node(T node) {
         this.node = node;
         this.nextN = null;
     }
     
-    public Node(T node, Node nextN){
+    public Node(T node, Node<T> nextN){
         this.node = node;
         this.nextN = nextN;
     }
