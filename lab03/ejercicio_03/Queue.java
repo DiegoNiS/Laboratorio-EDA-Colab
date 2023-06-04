@@ -10,12 +10,42 @@ public class Queue<T> implements QueueInterface<T> {
         this.lastN = null;
     }
 
+    public void enqueue(Node<T> node) {
+        if (firstN == null && lastN == null) {
+            firstN = node;
+        } else {
+            this.lastN.setNextN(node);
+        }
+        this.lastN = node;
+        this.size++;
+    }
+
+    private Node<T> dequeue() {
+        Node<T> temp = firstN;
+        if (firstN.getNextN() == null) {
+            firstN = null;
+            lastN = null;
+        } else {
+            firstN = firstN.getNextN();
+        }
+        this.size--;
+        return temp;
+    }
+
+    public void showQueue() {
+        Node<T> temp = firstN;
+        while (temp != null) {
+            System.out.println(temp);
+            temp = temp.getNextN();
+        }
+    }
+
     public boolean add(Node<T> e) throws Exception {
         try {
             enqueue(e);
             return true;
         } catch (Exception exception) {
-            throw new Exception("La cola está llena");
+            throw new Exception("Problema para agragar el elemento");
         }
     }
 
@@ -62,18 +92,5 @@ public class Queue<T> implements QueueInterface<T> {
 
     public int size() {
         return size;
-    }
-
-    public void enqueue(Node<T> node) {
-        this.lastN.setNextN(node);
-        this.lastN = node;
-        this.size++;
-    }
-
-    private Node<T> dequeue() {
-        Node<T> temp = firstN;
-        firstN = firstN.getNextN();
-        this.size--;
-        return temp;
     }
 }

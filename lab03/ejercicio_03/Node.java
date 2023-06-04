@@ -28,4 +28,7 @@ public class Node<T> {
         this.nextN = nextN;
     }
     
+    public String toString(){
+        return node.toString();
+    }
 }

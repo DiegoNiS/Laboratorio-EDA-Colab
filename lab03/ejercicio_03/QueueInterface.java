@@ -1,10 +1,10 @@
 public interface QueueInterface<T> {
     boolean add(Node<T> e) throws Exception;
-    Node<T> element();
+    Node<T> element()  throws Exception;
     boolean offer(Node<T> e);
     Node<T> peek();
     Node<T> poll();
-    Node<T> remove();
+    Node<T> remove() throws Exception;
     
     //Helpful methods
     boolean isEmpty();
