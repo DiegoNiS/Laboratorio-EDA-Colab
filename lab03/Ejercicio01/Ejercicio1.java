@@ -30,19 +30,20 @@ public class Ejercicio1 {
         suma1=suma(h1);
         suma2=suma(h2);
         suma3=suma(h3);
+        System.out.println(suma3);
         while(true){
             //CADA IF TIENE LA FUINCION DE COMPARAR CON LOS OTROS ARRAYS
-            if(suma1>suma2 && suma1>suma3){
+            if(suma1>suma2 || suma1>suma3){
                 h1[h1.length-cont1]=0;
                 suma1=suma(h1);
                 cont1++;
             }
-            else if(suma2>suma1 && suma2>suma3){
+            else if(suma2>suma1 || suma2>suma3){
                 h2[h2.length-cont2]=0;
                 suma2=suma(h2);
                 cont2++;
             }
-            else if(suma3>suma1 && suma3>suma1){
+            else if(suma3>suma1 || suma3>suma2){
                 h3[h3.length-cont3]=0;
                 suma3=suma(h3);
                 cont3++;
