@@ -18,7 +18,7 @@ public class Ejercicio1 {
         pila2.push(h2);
         pila3.push(h3);
         //IMPRIMIENDO
-        System.out.println("La todas las pilas tienen la altura de: ");
+        
         System.out.println(equalStack(pila1.pop(),pila2.pop(),pila3.pop()));
     }
     
@@ -30,7 +30,9 @@ public class Ejercicio1 {
         suma1=suma(h1);
         suma2=suma(h2);
         suma3=suma(h3);
-        System.out.println(suma3);
+        System.out.println("Altura de la pila 1: "+suma1);
+        System.out.println("Altura de la pila 2: "+suma2);
+        System.out.println("Altura de la pila 3: "+suma3);
         while(true){
             //CADA IF TIENE LA FUINCION DE COMPARAR CON LOS OTROS ARRAYS
             if(suma1>suma2 || suma1>suma3){
@@ -52,6 +54,7 @@ public class Ejercicio1 {
             else
                 break;    
         }
+        System.out.println("La todas las pilas tienen la altura de: ");
         return suma1;
     }
     //METODO PARA SUMAR EL ARRAY
@@ -63,3 +66,4 @@ public class Ejercicio1 {
         return suma;
     }
 }
+
