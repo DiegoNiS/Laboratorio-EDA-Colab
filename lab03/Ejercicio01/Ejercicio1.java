@@ -1,7 +1,6 @@
 
 import java.util.Stack;
 
-
 public class Ejercicio1 {
     public static void main(String[] args) {
         
@@ -20,37 +19,36 @@ public class Ejercicio1 {
     
     static int equalStack(int[]h1,int[]h2,int[]h3){
         
-        int suma1=0,suma2=0,suma3=0,cont1=1,cont2=1,cont3=1;
-        
-        for (int i = 0; i < h1.length; i++) 
-                suma1+=h1[i];      
-        for (int i = 0; i < h2.length; i++) 
-                suma2+=h1[i];
-        for (int i = 0; i < h3.length; i++) 
-                suma3+=h1[i];
-        
-            while(true){
-                if(suma1>suma2 && suma1>suma3){
+        int suma1,suma2,suma3,cont1=1,cont2=1,cont3=1;
+        suma1=suma(h1);
+        suma2=suma(h2);
+        suma3=suma(h3);
+        while(true){
+            if(suma1>suma2 && suma1>suma3){
                 h1[h1.length-cont1]=0;
+                suma1=suma(h1);
                 cont1++;
-                }
-                else if(suma2>suma1 && suma2>suma3){
-                h2[h2.length-cont2]=0;
-                cont2++;
-                }
-                else if(suma3>suma1 && suma3>suma1){
-                h3[h3.length-cont3]=0;
-                cont2++;
-                }
-                else
-                    break;
-                
             }
-         
-       
+            else if(suma2>suma1 && suma2>suma3){
+                h2[h2.length-cont2]=0;
+                suma2=suma(h2);
+                cont2++;
+            }
+            else if(suma3>suma1 && suma3>suma1){
+                h3[h3.length-cont3]=0;
+                suma3=suma(h3);
+                cont3++;
+            }
+            else
+                break;    
+        }
         return suma1;
     }
-    static void suma (){
+    static int suma (int[]h){
         
+        int suma=0;
+        for (int i = 0; i < h.length; i++)
+            suma+=h[i];
+        return suma;
     }
 }
