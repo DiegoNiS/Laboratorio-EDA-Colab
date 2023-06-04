@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Queue<T> implements QueueInterface<T> {
 
     private int size;
@@ -17,7 +15,7 @@ public class Queue<T> implements QueueInterface<T> {
             enqueue(e);
             return true;
         } catch (Exception exception) {
-            throw new IllegalStateException("La cola está llena");
+            throw new Exception("La cola está llena");
         }
     }
 
@@ -30,9 +28,9 @@ public class Queue<T> implements QueueInterface<T> {
         }
     }
 
-    public Node<T> element() {
+    public Node<T> element() throws Exception {
         if (isEmpty()) {
-            throw new NoSuchElementException("La cola está vacía");
+            throw new Exception("La cola está vacía");
         }
         return firstN;
     }
@@ -51,9 +49,9 @@ public class Queue<T> implements QueueInterface<T> {
         return dequeue();
     }
 
-    public Node<T> remove() {
+    public Node<T> remove() throws Exception {
         if (isEmpty()) {
-            throw new NoSuchElementException("La cola está vacía");
+            throw new Exception("La cola está vacía");
         }
         return dequeue();
     }
@@ -67,10 +65,15 @@ public class Queue<T> implements QueueInterface<T> {
     }
 
     public void enqueue(Node<T> node) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.lastN.setNextN(node);
+        this.lastN = node;
+        this.size++;
     }
 
     private Node<T> dequeue() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Node<T> temp = firstN;
+        firstN = firstN.getNextN();
+        this.size--;
+        return temp;
     }
 }
