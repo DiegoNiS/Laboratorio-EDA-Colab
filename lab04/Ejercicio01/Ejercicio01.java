@@ -1,4 +1,4 @@
-package Ejercicio01;
+// package Ejercicio01;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class Ejercicio01 {
         Scanner teclado = new Scanner(System.in);
         System.out.print("Ingrese el tamaño maximo del ultimo arreglo: ");
         tamano = teclado.nextInt();
-        ArrayList<LinkedList> casos = new ArrayList<LinkedList>();
+        ArrayList<LinkedList<Integer>> casos = new ArrayList<LinkedList<Integer>>();
         String archivoInsercion = "insercion.txt";
         PrintWriter oS = new PrintWriter(archivoInsercion);
         // Generan peores casos y se agregan al ArrayList
@@ -20,7 +20,7 @@ public class Ejercicio01 {
             casos.add(generarPeorCaso(n));
         }
         
-        Iterator<LinkedList> puntero = casos.iterator();
+        Iterator<LinkedList<Integer>> puntero = casos.iterator();
         while(puntero.hasNext()){
             oS.println(String.valueOf(insertionSort(puntero.next())));
         }
@@ -31,7 +31,7 @@ public class Ejercicio01 {
         p.plot();
     }
     //Metodo generarPeorCaso: genera peores casos de ordenamiento en un LinkedList
-    public static LinkedList generarPeorCaso(int t){
+    public static LinkedList<Integer> generarPeorCaso(int t){
         LinkedList<Integer> aux = new LinkedList<Integer>();
         for(int i = 0; i < t; i++){
             aux.add(t-i);
@@ -39,7 +39,7 @@ public class Ejercicio01 {
         return aux;
     }
     //Metodo insertionSort: ordena LinkedList de menor a mayor
-    public static long insertionSort(LinkedList list){
+    public static long insertionSort(LinkedList<Integer> list){
         int key;
         int i;
         long nano_startTime =System.nanoTime();

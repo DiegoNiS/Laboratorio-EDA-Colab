@@ -1,5 +1,5 @@
 //Clase linkedList
-package Ejercicio01;
+// package Ejercicio01;
 
 public class LinkedList<T> {
     // Atributos de la clase generica LinkedList

@@ -1,5 +1,5 @@
 // NODO DE LISTA ENLAZADA
-package Ejercicio01;
+// package Ejercicio01;
 
 public class Nodo<T> {
     // Atributos de Nodo
