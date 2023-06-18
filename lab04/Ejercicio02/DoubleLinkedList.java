@@ -10,6 +10,22 @@ public class DoubleLinkedList<E> {
         this.size = 0;
     }
 
+    public Node<E> getHead() {
+        return head;
+    }
+
+    public void setHead(Node<E> head) {
+        this.head = head;
+    }
+
+    public Node<E> getTail() {
+        return tail;
+    }
+
+    public void setTail(Node<E> tail) {
+        this.tail = tail;
+    }
+
     // Metodo size: devuelve la longitud del LinkedList
     public int size() {
         return this.size;
@@ -29,28 +45,31 @@ public class DoubleLinkedList<E> {
                 for (int i = 0; i < indice; i++) {
                     aux = aux.getNextNode();
                 }
-                return aux;
-            }else{
+            } else {
                 aux = this.tail;
-                for(int i = this.size-1; i > indice; i--){
+                for (int i = this.size - 1; i > indice; i--) {
                     aux = aux.getPreviousNode();
                 }
             }
-        }else{
+            return aux;
+        } else {
             System.out.println("No existe tal elemento dentro de los límites de la lista");
+            return null;
         }
-
     }
 
     // Metodo add: agrega un nuevo elemento al final de la lista enlazada
     public void add(E dato) {
-        if (this.size == 0) {
-            this.head = new Node<E>(dato);
-            this.size++;
+        Node<E> newNode = new Node<E>(dato);
+        if (isEmpty()) {
+            this.head = newNode;
+            this.tail = newNode;
         } else {
-            this.get(this.size() - 1).setNextNode(new Node<E>(dato));
-            this.size++;
+            this.tail.setNextNode(newNode);
+            newNode.setPreviousNode(tail);
+            tail = newNode;
         }
+        this.size++;
     }
 
     // Metodo remove: desenlaza al nodo del indice indicado
@@ -58,9 +77,14 @@ public class DoubleLinkedList<E> {
         if (indice < this.size && indice >= 0) {
             if (indice == 0) {
                 this.head = this.head.getNextNode();
+                this.head.getPreviousNode().setNextNode(null);
+                this.head.setPreviousNode(null);
             } else {
                 Node<E> current = this.get(indice);
+                current.getNextNode().setPreviousNode(current.getPreviousNode());
                 current.getPreviousNode().setNextNode(current.getNextNode());
+                current.setPreviousNode(null);
+                current.setNextNode(null);
             }
             this.size--;
         } else {
@@ -72,11 +96,10 @@ public class DoubleLinkedList<E> {
     //separada por ,
     @Override
     public String toString() {
-        String str = "";
-        for (Node<E> aux = this.raiz; aux != null; aux = aux.getNext()) {
+        String str = "{";
+        for (Node<E> aux = this.head; aux != null; aux = aux.getNextNode()) {
             str += aux.toString() + ", ";
         }
-        return str;
+        return str + "}";
     }
 }
-
