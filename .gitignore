@@ -3,3 +3,7 @@
 *.txt
 *.yaml
 /lab04/EjerciciopPrueba/JavaPlot-0.5.0/build/
+*.aux
+*.log
+*.out
+*.gz

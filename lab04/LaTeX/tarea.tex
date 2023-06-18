@@ -1,0 +1,63 @@
+\section{Tarea}
+\begin{enumerate}[{Ejercicio} 1.]
+	\item Utilizar el tipo generico de Lista Enlazada para generar los peores casos y ejecutar el
+	algoritmo de ordenamiento.\\
+	
+	\begin{lstlisting}[language=java, caption={caption}][H]
+		//List - Method get()
+		public Node<T> get(int indice) {
+			Node<T> aux=raiz;
+			for(int i=0;i<indice;i++)
+			aux=aux.getNextNode();
+			return aux;
+		}
+		//List - Method remove()
+		public void remove(int indice) {
+			if(indice<tamano) {
+				if(indice==0)
+				raiz=raiz.getNextNode();
+				else {
+					Node<T> anterior=this.get(indice-1);
+					anterior.setNextNode(this.get(indice+1));
+				}
+				tamano--;
+			}
+		}
+	\end{lstlisting}
+	
+	
+	\item Utilizar el tipo generico de Doble Lista Enlazada para generar los peores casos y ejecutar
+	el algoritmo de ordenamiento.
+	
+	\begin{lstlisting}[language=java, caption={caption}][H]
+		public class Node <E > {
+			private E data ;
+			private Node <E > nextNode ;
+			private Node <E > previousNode ;
+			
+			/* Getters y Setter ... */
+			
+			Node () {
+				this . data = null ;
+				this . nextNode = null ;
+				this . previousNode = null ;
+			}
+			Node ( E data ) {
+				this . data = data ;
+				this . nextNode = null ;
+				this . previousNode = null ;
+			}
+			Node ( E data , Node <E > nextNode ) {
+				this . data = data ;
+				this . nextNode = nextNode ;
+				this . previousNode = null ;
+			}
+			Node ( E data , Node <E > nextNode , Node <E > previousNode ) {
+				this . data = data ;
+				this . nextNode = nextNode ;
+				this . previousNode = previousNode ;
+			}
+		}
+	\end{lstlisting}
+	
+\end{enumerate}
