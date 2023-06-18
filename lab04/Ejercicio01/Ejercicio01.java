@@ -51,7 +51,7 @@ public class Ejercicio01 {
                 i = i-1;
             }
             list.get(i+1).setDato(key);
-            System.out.println(list);
+            //System.out.println(list);
         }
         long nano_endTime = System.nanoTime();
         return nano_endTime - nano_startTime;
