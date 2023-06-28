@@ -1,0 +1,86 @@
+\section{Tarea}
+\begin{itemize}
+    \item Elabore un informe implementando Árboles AVL con toda la lista de operaciones \verb|search()|, \verb|getMin()|, \verb|getMax()|, \verb|parent()|, \verb|son()|, \verb|insert()|, \verb|remove()|.
+    \item INPUT: Una sóla palabra en mayúsculas.
+    \item OUTPUT: Se debe contruir el árbol AVL considerando el valor decimal de su código ascii.
+    \item Luego, pruebe todas sus operaciones implementadas.
+    \item Estudie la librería Graph Stream para obtener una salida gráfica de su implementación.
+    \item Utilice todas las recomendaciones dadas por el docente.
+\end{itemize}
+\section{Implementacion}
+\subsubsection*{NodeAVL}
+NodeAVL.java define la estructura de nodos que se utilizan para construir el árbol AVL. Este archivo contiene la implementación de la clase NodeAVL, que representa un nodo con un valor y dos referencias a los hijos izquierdo y derecho.\\
+
+La siguiente clase contiene:
+\begin{itemize}
+    \item data: que representa los datos almacenados en el nodo.
+    \item left: que representa el hijo izquierdo del nodo.
+    \item right: que representa el hijo derecho del nodo.
+    \item bf: que es el factor de balance del nodo.
+    \item Un constructor con tres parámetros (E data, NodeAvl<E> left, NodeAvl<E> right) que inicializa las variables de instancia con los valores indicados, y establece el factor de balance bf en 0.
+    \item Respectivos getters y setters
+\end{itemize}
+
+\lstinputlisting[language=java, numbers=left]{src/NodeAvl.java}
+
+
+\subsubsection*{AVLTree}
+define la implementación del árbol AVL propiamente dicho. Aquí se encuentra la implementación de la clase AVLTree, que utiliza los nodos definidos en NodeAVL.java para construir el árbol AVL. El archivo contiene los métodos necesarios para insertar y eliminar nodos en el árbol, así como para mantener su balance y garantizar su correcto funcionamiento.
+
+\begin{itemize}
+    \item insert(E data): Este método se utiliza para insertar un nuevo elemento en el árbol AVL. Toma como argumento el dato a insertar y llama al método privado insertNode para realizar la inserción recursivamente. Si el árbol está vacío, crea un nuevo nodo y lo establece como la raíz. Luego, compara el dato con el nodo actual y decide si debe insertarse a la izquierda o a la derecha del nodo actual. Después de insertar el nuevo nodo, actualiza el factor de equilibrio (bf) del nodo y realiza rotaciones si es necesario para mantener el equilibrio del árbol.
+
+\item search(E data): Este método se utiliza para buscar un elemento en el árbol AVL. Toma como argumento el dato a buscar y llama al método privado searchNode para realizar la búsqueda de manera recursiva. Compara el dato con el nodo actual y decide si debe buscar a la izquierda o a la derecha del nodo actual. Si encuentra el dato, devuelve true; de lo contrario, devuelve false.
+
+\item getMin(): Este método devuelve el valor mínimo almacenado en el árbol AVL. Comienza desde la raíz y recorre los nodos hacia la izquierda hasta encontrar el nodo más a la izquierda, que contiene el valor mínimo.
+
+\item getMax(): Este método devuelve el valor máximo almacenado en el árbol AVL. Comienza desde la raíz y recorre los nodos hacia la derecha hasta encontrar el nodo más a la derecha, que contiene el valor máximo.
+
+\item parent(E data): Este método devuelve el valor del padre de un nodo dado en el árbol AVL. Utiliza el método privado findParent para buscar el nodo padre del nodo con el dato especificado. Si se encuentra el padre, se devuelve su valor; de lo contrario, se devuelve null.
+
+\item sons(E data): Este método devuelve los hijos (izquierdo y derecho) de un nodo dado en el árbol AVL. Utiliza el método privado findNode para buscar el nodo con el dato especificado. Si se encuentra el nodo, se crean y devuelven un arreglo de tamaño 2 que contiene los valores de los hijos izquierdo y derecho respectivamente. Si alguno de los hijos no existe, se establece como null en el arreglo.
+
+\item remove(E data): Este método se utiliza para eliminar un nodo con un dato específico del árbol AVL. Utiliza el método privado removeNode para realizar la eliminación recursivamente. Si el nodo a eliminar es una hoja, simplemente se elimina. Si el nodo tiene solo un hijo, se reemplaza por su único hijo. Si el nodo tiene dos hijos, se encuentra el sucesor (el nodo con el valor mínimo en el subárbol derecho), se reemplaza el valor del nodo a eliminar por el valor del sucesor y se elimina el sucesor. Después de eliminar el nodo, se actualiza el factor de equilibrio (bf) del nodo y se realizan rotaciones si es necesario para mantener el equilibrio del árbol.
+\end{itemize}
+
+Otros métodos auxiliares:
+
+\begin{itemize}
+    \item getHeight(NodeAvl$\langle $E$\rangle$ node): Este método calcula la altura de un nodo en el árbol AVL. Utiliza recursión para obtener las alturas de los subárboles izquierdo y derecho y devuelve la altura máxima más uno.
+
+\item calculateBalanceFactor(NodeAvl$\langle $E$\rangle$  node): Este método calcula el factor de equilibrio (bf) de un nodo en el árbol AVL. Resta la altura del subárbol izquierdo de la altura del subárbol derecho.
+
+\item balanceNode(NodeAvl$\langle $E$\rangle$  node): Este método realiza las rotaciones necesarias para mantener el equilibrio del árbol AVL. Si el factor de equilibrio de un nodo es menor que -1, se realiza una rotación hacia la izquierda. Si el factor de equilibrio es mayor que 1, se realiza una rotación hacia la derecha. Luego, se actualizan los factores de equilibrio de los nodos involucrados en la rotación.
+
+\item leftRotate(NodeAvl$\langle $E$\rangle$  node): Este método realiza una rotación hacia la izquierda en el árbol AVL. El nodo pasado como argumento se convierte en el hijo izquierdo de su hijo derecho, y el hijo derecho se convierte en el nuevo nodo raíz del subárbol. Los factores de equilibrio se actualizan después de la rotación.
+
+\item rightRotate(NodeAvl$\langle $E$\rangle$  node): Este método realiza una rotación hacia la derecha en el árbol AVL. El nodo pasado como argumento se convierte en el hijo derecho de su hijo izquierdo, y el hijo izquierdo se convierte en el nuevo nodo raíz del subárbol. Los factores de equilibrio se actualizan después de la rotación.
+
+\item printInOrder(): Este método imprime los elementos del árbol AVL en orden ascendente. Utiliza una recorrido inorden (izquierda, raíz, derecha) y muestra los datos de los nodos en el orden correcto
+\end{itemize}
+
+\lstinputlisting[language=java, numbers=left]{src/AVLTree.java}
+
+
+
+
+\subsubsection*{Main}
+se utiliza para probar el funcionamiento del árbol AVL implementado en los archivos anteriores. Contiene una serie de pruebas que se pueden ejecutar para verificar que el árbol funciona correctamente y cumple con los requisitos de un árbol AVL, como por ejemplo, que esté balanceado y que no tenga nodos duplicados.
+
+\lstinputlisting[language=java, numbers=left]{src/Main.java}
+
+
+
+
+
+\section{Pregunta}
+\textbf{¿Explique como es el algoritmo que implementó para obtener el factor de equilibrio de un nodo?.}\\
+
+Esto se logra utilizando los siguientes métodos, con los siguientes funcionamientos.
+\begin{itemize}
+    \item getHeight(NodeAvl$\langle $E$\rangle$ node): Este método calcula la altura de un nodo en el árbol AVL. Utiliza recursión para obtener las alturas de los subárboles izquierdo y derecho y devuelve la altura máxima más uno.
+
+    \item calculateBalanceFactor(NodeAvl$\langle $E$\rangle$  node): Este método calcula el factor de equilibrio (bf) de un nodo en el árbol AVL. Resta la altura del subárbol izquierdo de la altura del subárbol derecho. 
+
+    \item balanceNode(NodeAvl$\langle $E$\rangle$  node): Este método realiza las rotaciones necesarias para mantener el equilibrio del árbol AVL. Si el factor de equilibrio de un nodo es menor que -1, se realiza una rotación hacia la izquierda. Si el factor de equilibrio es mayor que 1, se realiza una rotación hacia la derecha. Luego, se actualizan los factores de equilibrio de los nodos involucrados en la rotación.
+\end{itemize}
