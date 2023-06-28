@@ -3,40 +3,13 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import java.util.Scanner;
-
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws RuntimeException{
         AVLTree<Integer> avlTree = new AVLTree<>();
-        /* 
-        <--PRUEBAS DEL ARBOL AVL-->
         
-        avlTree.insert(10);
-        avlTree.insert(20);
-        avlTree.insert(30);
-        avlTree.insert(40);
-        avlTree.insert(50);
-        avlTree.insert(60);
-        avlTree.insert(70);
-        avlTree.printInOrder();
-
-        System.out.println("Search 30: " + avlTree.search(30));
-        System.out.println("Search 60: " + avlTree.search(60));
-
-        System.out.println("Min: " + avlTree.getMin());
-        System.out.println("Max: " + avlTree.getMax());
-
-        System.out.println("Parent of 40: " + avlTree.parent(40));
-        System.out.println("Parent of 10: " + avlTree.parent(10));
-
-        System.out.println("Sons of 20: " + Arrays.toString(avlTree.sons(20)));
-
-        avlTree.remove(30);
-        avlTree.printInOrder();
-        
-        */
-        
-        //Frase
+        // INPUT
         Scanner entrada=new Scanner (System.in);
         String frase;
         System.out.print("Ingrese una frase: ");
@@ -46,11 +19,27 @@ public class Main {
         
         for (int i = 0; i < frase.length(); i++) {
             int aux=frase.charAt(i);
-            avlTree.insert(aux);
+            avlTree.insert(aux);    // Prueba del metodo insert()
         }
+        // Pruebas de los metodos search(), getMin(), getMax(), parent(), son(), remove().
         avlTree.printInOrder();
         
-        // GRAFICA con GraphStream 1.3
+        System.out.println("Search 65: " + avlTree.search(65));
+        System.out.println("Search 70: " + avlTree.search(70));
+
+        System.out.println("Min: " + avlTree.getMin());
+        System.out.println("Max: " + avlTree.getMax());
+
+        System.out.println("Parent of 65: " + avlTree.parent(65));
+        System.out.println("Parent of 79: " + avlTree.parent(79));
+
+        System.out.println("Sons of 68: " + Arrays.toString(avlTree.sons(68)));
+        
+        avlTree.remove(79);
+        
+        avlTree.printInOrder();
+        
+        // GRAFICA con GraphStream
         Graph graph = new SingleGraph("ArbolAVL");
         
         //Graficar los Nodos, apartir de la raiz
