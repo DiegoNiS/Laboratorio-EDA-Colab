@@ -8,8 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 
 public class LaboratorioEDA extends JFrame {
 
@@ -18,7 +20,11 @@ public class LaboratorioEDA extends JFrame {
     private JPanel panel;
     private JPanel subpanel1;
     private JPanel subpanel2;
+    private String[] arregloStrings;
     JTextArea texto;
+    String cadena = """
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit Cupiditate officiis repudiandae eum fuga ut assumenda ad Inventore dolorum dicta illo officiis porro quia deserunt saepe ullam animi ab Eaque dolorum Maxime nisi lorem voluptatibus ex est ipsam quisquam quibusdam nesciunt ea blanditiis maiores tempora doloremque harum A adipisci laboriosam laudantium reprehenderit molestiae amet saepe ipsum quod et autem fuga ipsa minima expedita! Dignissimos lorem necessitatibus quae velit pariatur esse impedit itaque eaque illo molestiae eos suscipit nam maiores facilis molestias
+                      """;
     JTextField reemplazate;
     JButton reemplazar;
     JTextField buscarcontext;
@@ -38,6 +44,7 @@ public class LaboratorioEDA extends JFrame {
         add(panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Trie");
+        
         contents();
 
         setVisible(true);
@@ -47,7 +54,7 @@ public class LaboratorioEDA extends JFrame {
     }
 
     private void countall() {
-        String[] arregloStrings = texto.getText().split(" ");
+        arregloStrings = texto.getText().split(" ");
         for (int i = 0; i < arregloStrings.length; i++) {
             trie.add(arregloStrings[i].toLowerCase(), i);
         }
@@ -60,14 +67,36 @@ public class LaboratorioEDA extends JFrame {
         reemplazate.setEnabled(noHayBusqueda);
         reemplazar.setEnabled(noHayBusqueda);
     }
+    
+    private void changecolor(LinkedList<Integer> colorPositions){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html>");
+        System.out.println(colorPositions);
+        LNode<Integer> firstE = colorPositions.getHead();
+        System.out.println(firstE.getData());
+        for (int i = 0; i < arregloStrings.length; i++) {
+            String word = arregloStrings[i];
+            if (firstE != null && i == firstE.getData()) {
+                sb.append("<font color=\"red\">").append(word).append("</font> ");
+                firstE = firstE.getNext();
+            } else {
+                sb.append(word).append(" ");
+            }
+        }
+        sb.append("</html>");
+        String text = sb.toString();
+        texto.setText(text);
+    }
 
     private void contents() {
         texto = new JTextArea(10, 60);
-        texto.setText("""
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit Cupiditate officiis repudiandae eum fuga ut assumenda ad Inventore dolorum dicta illo officiis porro quia deserunt saepe ullam animi ab Eaque dolorum Maxime nisi voluptates voluptatibus ex est ipsam quisquam quibusdam nesciunt ea blanditiis maiores tempora doloremque harum A adipisci laboriosam laudantium reprehenderit molestiae amet saepe ipsum quod et autem fuga ipsa minima expedita! Dignissimos ducimus necessitatibus quae velit pariatur esse impedit itaque eaque illo molestiae eos suscipit nam maiores facilis molestias
-                      """);
+        texto.setText(cadena);
 
         texto.setLineWrap(true);
+        
+        texto.setEditable(false);
+        texto.setLineWrap(true);
+        texto.setWrapStyleWord(true);
         JLabel label1 = new JLabel("Palabras a buscar");
         buscarcontext = new JTextField();
         JButton buscar = new JButton("Buscar");
@@ -92,6 +121,8 @@ public class LaboratorioEDA extends JFrame {
             TNode<Integer> bqt = trie.search(buscarcontext.getText().toLowerCase());
             System.out.println(bqt);
             camposreemplazar();
+            System.out.println(bqt.getPositions());
+            changecolor(bqt.getPositions());
         }
     }
 

@@ -8,7 +8,7 @@ public class LinkedList<T> {
         items = 0;
     }
     public LNode<T> getHead() {
-        return head;
+        return this.head;
     }
 
     public int getItems() {
@@ -16,7 +16,7 @@ public class LinkedList<T> {
     }
     public void add(T num){
         if (isEmpty()){
-            this.head = new LNode<T>(num, this.head);
+            this.head = new LNode<T>(num);
             this.items ++;
         }
 	    else {
