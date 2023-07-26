@@ -13,4 +13,9 @@ public class LinkedList<T> {
     public boolean isEmpty(){
         return this.items == 0;
     }
+    
+    public String toString(){
+        
+        return " ";
+    }
 }

@@ -89,7 +89,7 @@ public class LaboratorioEDA extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            TNode<Integer> bqt = trie.search(buscarcontext.getText());
+            TNode<Integer> bqt = trie.search(buscarcontext.getText().toLowerCase());
             System.out.println(bqt);
             camposreemplazar();
         }
