@@ -8,7 +8,24 @@ public class TrieTree {
         this.root = root;
     }
 
-    public boolean add(String word, int pos) {
+    public TNode<Integer> add(String word, LinkedList<Integer> pos) {
+        try {
+            TNode<Integer> node = add(word);
+            node.insertPosition(pos);
+        } finally {
+            return null;
+        }
+    }
+    public TNode<Integer> add(String word, int pos) {
+        try {
+            TNode<Integer> node= add(word);
+            node.insertPosition(pos);
+        } finally {
+            return null;
+        }
+    }
+    
+    public TNode<Integer> add(String word){
         try {
             char[] letters = word.toCharArray();
             TNode<Integer> node = root;
@@ -27,11 +44,12 @@ public class TrieTree {
                 }
                 node = thenode;
             }
-            node.insertPosition(pos);
+            return node;
         } finally {
-            return false;
+            return null;
         }
     }
+
 
     public TNode<Integer> search(String word) {
         char[] caracts = word.toCharArray();
@@ -48,10 +66,13 @@ public class TrieTree {
     }
 
     public boolean replace(String lword, String nword) {
-        return true;
-    }
-
-    public boolean exist(String word) {
-        return true;
+        TNode<Integer> word = search(lword);
+        if(word != null){
+            LinkedList<Integer> positions = word.getPositions();
+            //delete word
+            add
+        }else{
+            return false;
+        }
     }
 }

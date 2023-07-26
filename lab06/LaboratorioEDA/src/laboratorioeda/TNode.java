@@ -1,6 +1,7 @@
 package laboratorioeda;
 
-public class TNode <T extends Comparable<T>>{
+public class TNode<T extends Comparable<T>> {
+
     private T d;
     private TNode<T> children;
     private TNode<T> left;
@@ -10,22 +11,21 @@ public class TNode <T extends Comparable<T>>{
     public TNode(T d) {
         this(d, new LinkedList<>());
     }
-    
-    public TNode(T d, int pos){
+
+    public TNode(T d, int pos) {
         this(d);
         positions.add(pos);
     }
-    
-    public TNode(T d, LinkedList<Integer> positions){
+
+    public TNode(T d, LinkedList<Integer> positions) {
         this.d = d;
         this.positions = positions;
         this.children = null;
         this.left = null;
         this.right = null;
     }
-    
+
     // Getters
-    
     public T getD() {
         return d;
     }
@@ -34,20 +34,19 @@ public class TNode <T extends Comparable<T>>{
         return children;
     }
 
-    private TNode<T> getLeft() {
+    public TNode<T> getLeft() {
         return left;
     }
 
-    private TNode<T> getRight() {
+    public TNode<T> getRight() {
         return right;
     }
 
     public LinkedList<Integer> getPositions() {
         return positions;
     }
-    
-    // Setters
 
+    // Setters
     public void setChildren(TNode<T> children) {
         this.children = children;
     }
@@ -59,10 +58,8 @@ public class TNode <T extends Comparable<T>>{
     public void setRight(TNode<T> right) {
         this.right = right;
     }
-    
-    
+
     // Methods
-    
     public TNode<T> search(T value) {
         return searchRecursive(this, value);
     }
@@ -78,37 +75,44 @@ public class TNode <T extends Comparable<T>>{
             return searchRecursive(node.getRight(), value);
         }
     }
-    
+
     public void insert(TNode<T> node) {
         insertRecursive(this, node);
     }
 
     private void insertRecursive(TNode<T> node, TNode<T> newNode) {
         if (newNode.getD().compareTo(node.getD()) < 0) {
-            if(node.getLeft() == null){
+            if (node.getLeft() == null) {
                 node.setLeft(newNode);
             } else {
                 insertRecursive(node.getLeft(), newNode);
             }
         } else if (newNode.getD().compareTo(node.getD()) > 0) {
-            if(node.getRight() == null){
+            if (node.getRight() == null) {
                 node.setRight(newNode);
             } else {
                 insertRecursive(node.getRight(), newNode);
             }
-        } 
+        }
     }
 
-    
-    public void delete(){
-        //codigo para eliminar el nodo
+    public void delete() {
+        d = null;
+        children = null;
+        left = null;
+        right = null;
+        positions = null;
     }
-    
-    public boolean isWordEnd(){
+
+    public boolean isWordEnd() {
         return this.positions.isEmpty();
     }
-    
-    public void insertPosition(int position){
+
+    public void insertPosition(int position) {
         this.positions.add(position);
+    }
+
+    public void insertPosition(LinkedList<Integer> position) {
+        this.positions = position;
     }
 }
