@@ -1,6 +1,5 @@
 package laboratorioeda;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -8,13 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
 
 public class LaboratorioEDA extends JFrame {
-    
+
     private final int ANCHO = 700;
     private final int LARGO = 500;
     private JPanel panel;
@@ -30,50 +29,50 @@ public class LaboratorioEDA extends JFrame {
     JButton reemplazar;
     JTextField buscarcontext;
     private TrieTree trie;
-    
+
     public LaboratorioEDA() {
         setSize(ANCHO, LARGO);
         panel = new JPanel();
         subpanel1 = new JPanel();
         subpanel2 = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        
+
         subpanel1.setLayout(new BoxLayout(subpanel1, BoxLayout.Y_AXIS));
         subpanel2.setLayout(new BoxLayout(subpanel2, BoxLayout.Y_AXIS));
-        
+
         int margin = 20;
         subpanel1.setBorder(new EmptyBorder(margin, margin, margin, 0));
         subpanel2.setBorder(new EmptyBorder(margin, margin, margin, margin));
-        
+
         panel.add(subpanel1);
         panel.add(subpanel2);
         add(panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Trie");
-        
+
         contents();
-        
+
         setVisible(true);
-        
+
         trie = new TrieTree(new TNode(' '));
         countall();
     }
-    
+
     private void countall() {
         arregloStrings = texto.getText().split(" ");
         for (int i = 0; i < arregloStrings.length; i++) {
             trie.add(arregloStrings[i].toLowerCase(), i);
         }
-        
+
         camposreemplazar();
     }
-    
+
     private void camposreemplazar() {
         boolean noHayBusqueda = !buscarcontext.getText().equals("");
         reemplazate.setEnabled(noHayBusqueda);
         reemplazar.setEnabled(noHayBusqueda);
     }
-    
+
     private void changecolor(LinkedList<Integer> colorPositions) {
         StringBuilder sb = new StringBuilder();
         sb.append("<html>");
@@ -91,13 +90,13 @@ public class LaboratorioEDA extends JFrame {
         String text = sb.toString();
         texto.setText(text);
     }
-    
+
     private void contents() {
         texto = new JTextArea(10, 60);
         texto.setText(cadena);
-        
+
         texto.setLineWrap(true);
-        
+
         texto.setEditable(false);
         texto.setLineWrap(true);
         texto.setWrapStyleWord(true);
@@ -117,34 +116,47 @@ public class LaboratorioEDA extends JFrame {
         subpanel2.add(reemplazate);
         subpanel2.add(reemplazar);
         subpanel2.add(mssg);
-        
-        buscar.addActionListener(new Listener());
-    }
-    
-    private class Listener implements ActionListener {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (buscarcontext.getText().equals("")) {
-                texto.setText(cadena);
-                mssg.setVisible(false);
-            } else {
+
+        buscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (buscarcontext.getText().equals("")) {
+                    texto.setText(cadena);
+                    mssg.setVisible(false);
+                } else {
+                    TNode<Integer> bqt = trie.search(buscarcontext.getText().toLowerCase());
+                    if (bqt != null) {
+                        System.out.println(bqt);
+                        camposreemplazar();
+                        System.out.println(bqt.getPositions());
+                        changecolor(bqt.getPositions());
+                        mssg.setVisible(false);
+                    } else {
+                        mssg.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        reemplazar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 TNode<Integer> bqt = trie.search(buscarcontext.getText().toLowerCase());
                 if (bqt != null) {
+                    trie.replace(buscarcontext.getText(), reemplazate.getText(), arregloStrings);
                     System.out.println(bqt);
                     camposreemplazar();
                     System.out.println(bqt.getPositions());
                     changecolor(bqt.getPositions());
                     mssg.setVisible(false);
-                } else {
-                    mssg.setVisible(true);
                 }
+                
             }
-        }
+        });
     }
-    
+
     public static void main(String[] args) {
         new LaboratorioEDA();
     }
-    
+
 }
